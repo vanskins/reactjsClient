@@ -16,7 +16,20 @@ class App extends Component {
   componentDidMount() {
   }
   componentWillUpdate() {
-    console.log(this.state.movies);
+    console.log(this.state.movies !== undefined ? this.state.movies : 'none');
+  }
+
+  _movies(){
+    if (this.state.movies !== undefined) {
+
+       return this.state.movies.map((movie, index) => (
+          <div key={index}>
+            <h4>title {movie.title} episode - {movie.episode_number}</h4>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/1200px-Star_Wars_Logo.svg.png"/>
+            <p>{movie.description}</p>
+          </div>
+        ));
+    }
   }
 
   render() {
@@ -24,13 +37,10 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to {}</h2>
-          <button onClick={this.starwars}>press me</button>
-          <p></p>
+          <h2>star wars</h2>
+          <button onClick={this.starwars}>Fetch from API madafackuhhhh!</button>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        {this._movies()}
       </div>
 
     );
